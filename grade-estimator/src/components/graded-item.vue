@@ -1,10 +1,25 @@
 <template>
-    <div class="graded-item">
-        {{itemName}}
+    <div class="graded-item field is-horizontal">
 
-        <select v-on:select="handleSelection">
-            <option v-for="o in options" value="o.calcValue">{{ o.gradedValue }}</option>
-        </select>
+        <div class="field-label is-normal">
+            <label class="label">{{item.name}}</label>
+        </div>
+
+        <div class="field-body">
+            <div class="field is-narrow">
+                <div class="select " v-bind:class="selectClass">
+
+                    <select v-model="selected">
+                        <option disabled value="">Please select one</option>
+                        <option v-for="o in item.options" v-bind:value="o.calcValue"
+                                v-on:select="handleSelection(o.calcValue)">{{ o.displayValue }}
+                        </option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -12,12 +27,30 @@
     export default {
         name: "graded-item",
 
-        props: ['itemName', 'pctOfTotal', 'options'],
+        props: ['item'],
+        data: function () {
+            return {
+                selected: ''
+            }
+        },
 
-        methods:{
-            handleSelection : function(v){
-                let gvalue = v * this.pctOfTotal;
-                this.$emit('selection', gvalue);
+        watch: {
+            selected: function (newVal, oldVal) {
+                this.item.score = newVal;
+            }
+        },
+
+        computed: {
+            selectClass: function () {
+                if (this.selected === '') return 'is-primary'
+            }
+        },
+
+        methods: {
+            handleSelection: function (v) {
+                this.item.score = v;
+                // let gvalue = v * this.pctOfTotal;
+                // this.$emit('selection', gvalue);
 
             }
         }
