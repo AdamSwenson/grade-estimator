@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import 'lodash';
+import 'lodash'
 
 Vue.config.productionTip = false
 

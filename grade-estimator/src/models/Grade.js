@@ -1,31 +1,29 @@
 export default class Grade {
-
-    constructor() {
-
-        /** The id of the grade assignment on the server */
-        this.id;
+    constructor () {
+    /** The id of the grade assignment on the server */
+        this.id
 
         /** The letter grade or other string display */
-        this.displayValue;
+        this.displayValue
 
         /** The value of the grade used in calculations */
-        this.calcValue;
+        this.calcValue
 
         /** The id of the grade object on the server */
-        this.gradeId;
+        this.gradeId
 
         /** If the grade is part of a user defined group of grades,
          * this identifies the group */
-        this.group;
+        this.group
 
         /** The minimum score required to receive this grade */
-        this.minScore;
+        this.minScore
 
         /** The correct position in the order of grades */
-        this.ordinal;
+        this.ordinal
     }
 
-    static get letterGrades() {
+    static get letterGrades () {
         return [
             'A+',
             'A',
@@ -39,12 +37,12 @@ export default class Grade {
             'D+',
             'D',
             'D-',
-            'F',
-        ];
+            'F'
+        ]
     }
 
     /** @var array The standardized grades and various associated values in descending order */
-    static get defaults() {
+    static get defaults () {
         return [
             {displayValue: 'A+', calcValue: 98, minScore: 97, group: 0, ordinal: 0},
             {displayValue: 'A', calcValue: 95, minScore: 93, group: 0, ordinal: 1},
@@ -59,8 +57,7 @@ export default class Grade {
             {displayValue: 'D', calcValue: 65, minScore: 63, group: 0, ordinal: 10},
             {displayValue: 'D-', calcValue: 62, minScore: 60, group: 0, ordinal: 11},
             {displayValue: 'F', calcValue: 55, minScore: 50, group: 0, ordinal: 12}
-        ];
-
+        ]
     }
 
     /**
@@ -68,8 +65,8 @@ export default class Grade {
      *
      * @returns {{}}
      */
-    static initializeGrades() {
-        let grades = [];
+    static initializeGrades () {
+        let grades = []
         _.forEach(Grade.defaults, function (grade) {
             grades.push(Grade.factory({
                 displayValue: grade.displayValue,
@@ -77,43 +74,39 @@ export default class Grade {
                 minScore: grade.minScore,
                 group: grade.group,
                 ordinal: grade.ordinal
-            }));
-        });
+            }))
+        })
         //
-        return grades;
+        return grades
     }
-
 
     /**
      * Returns a list of strings which are property
      * names. These fields can be filled from the input
      * @returns {[string,string]}
      */
-    static get fillableProps() {
+    static get fillableProps () {
         return [
             'id',
-            'displayValue', //the string value of the grade
+            'displayValue', // the string value of the grade
             'calcValue',
             'gradeId',
             'group',
             'minScore',
             'ordinal'
-        ];
-
+        ]
     }
 
-
-    static factory(params) {
-        let obj = new Grade();
-        //fill any fillable values
+    static factory (params) {
+        let obj = new Grade()
+        // fill any fillable values
         Grade.fillableProps.forEach(function (v) {
             if (typeof params[v] !== 'undefined') {
-                obj[v] = params[v];
+                obj[v] = params[v]
             }
         })
-        return obj;
+        return obj
     }
-
 };
 
 // module.exports = {

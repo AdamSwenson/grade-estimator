@@ -1,11 +1,10 @@
-import Item from "./Item";
-import Grade from "./Grade";
+import Item from './Item'
+import Grade from './Grade'
 
 export default class LetterGradedItem extends Item {
+    constructor (name, pctOfTotal = 0) {
+        super(name, pctOfTotal)
 
-    constructor(name, pctOfTotal = 0) {
-        super(name, pctOfTotal);
-
-        this.options = Grade.initializeGrades();
+        this.options = Grade.initializeGrades()
     }
 }
