@@ -1,6 +1,6 @@
 import Item from './Item'
 
-export default class LetterGradedItem extends Item {
+export default class PassFailItem extends Item {
     constructor (name, pctOfTotal = 0) {
         super(name, pctOfTotal)
 
